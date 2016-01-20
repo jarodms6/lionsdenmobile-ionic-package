@@ -21,7 +21,9 @@ gulp.task('sass', function(done) {
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
-    .pipe(rename({ extname: '.min.css' }))
+    .pipe(rename({
+      extname: '.min.css'
+    }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
@@ -48,4 +50,51 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+var replace = require('replace');
+var replaceFiles = ['./config.xml'];
+
+gulp.task('use-dev-apid', function() {
+  return replace({
+    regex: "com.mycompanyname.myapp",
+    replacement: "com.mycompanyname.myapp1234",
+    paths: replaceFiles,
+    recursive: false,
+    silent: false,
+  });
+});
+
+gulp.task('non-dev-apid', function() {
+  return replace({
+    regex: "com.mycompanyname.myapp1234",
+    replacement: "com.mycompanyname.myapp",
+    paths: replaceFiles,
+    recursive: false,
+    silent: false,
+  });
+});
+
+
+var gulp = require('gulp');
+var bump = require('gulp-bump');
+
+// Basic usage:
+// Will patch the version
+gulp.task('bump', function() {
+  gulp.src('./package.json')
+    .pipe(bump({
+      type: 'patch'
+    }))
+    .pipe(gulp.dest('./'));
+});
+
+// Basic usage:
+// Will patch the version
+gulp.task('bump-minor', function() {
+  gulp.src('./package.json')
+    .pipe(bump({
+      type: 'minor'
+    }))
+    .pipe(gulp.dest('./'));
 });
