@@ -83,18 +83,18 @@ var bump = require('gulp-bump');
 // Will patch the version
 gulp.task('bump', function() {
   gulp.src('./package.json')
-    .pipe(bump({
-      type: 'patch'
-    }))
+    .pipe(bump({type:'patch'}))
     .pipe(gulp.dest('./'));
 });
 
-// Basic usage:
-// Will patch the version
 gulp.task('bump-minor', function() {
   gulp.src('./package.json')
-    .pipe(bump({
-      type: 'minor'
-    }))
+    .pipe(bump({type:'minor'}))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('bump-major', function(){
+  gulp.src('./package.json')
+    .pipe(bump({type:'major'}))
     .pipe(gulp.dest('./'));
 });
