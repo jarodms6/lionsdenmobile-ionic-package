@@ -1,6 +1,6 @@
 {
   "name": "ldmpackage",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "My Ionic Example Package: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
@@ -25,7 +25,5 @@
     "cordova-plugin-statusbar@2.1.0",
     "ionic-plugin-keyboard@1.0.8"
   ],
-  "cordovaPlatforms": [
-    "android"
-  ]
+  "cordovaPlatforms": []
 }
