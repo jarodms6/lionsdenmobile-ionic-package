@@ -20,10 +20,10 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
     regex: "com.mycompanyname.myapp1234",
     replacement: "com.mycompanyname.myapp",
 ```
-   Why are we doing this?
-   When using "ionic run" I will use a DEV version for my package name. The DEV version will get installed on my phone under **com.mycompanyname.myapp1234**
+  Why are we doing this?
+  When using "ionic run" I will use a DEV version for my package name. The DEV version will get installed on my phone under **com.mycompanyname.myapp1234**
 
-   When doing a build and releasing the app to App Stores, I will have a different package name (my production ready app id) so I can my release version as well.
+  When doing a build and releasing the app to App Stores, I will have a different package name (my production ready app id) so I can my release version as well.
 
 1. Install dependencies found in package.json
 
@@ -51,14 +51,14 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
 ```
 ionic build
 ```
-    * Before Build
-        * Make sure we are using the PROD App ID
-        * Use cordova-version to update config.xml version number to what is in package.json
-            * At this point, package.json has the version number from the last SUCCESSFUL build_number
-    * build happens...
-    * After Build
-        * Increment PATCH version in package.json by 1
-            * package.json is incremented LAST in case the build fails. Doing this first means we would increment the version number for failed builds.
+  * Before Build
+    * Make sure we are using the PROD App ID
+    * Use cordova-version to update config.xml version number to what is in package.json
+      * At this point, package.json has the version number from the last SUCCESSFUL build_number
+  * build happens...
+  * After Build
+    * Increment PATCH version in package.json by 1
+    * package.json is incremented LAST in case the build fails. Doing this first means we would increment the version number for failed builds.
 
 1. Commit changes and tag
 
