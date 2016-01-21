@@ -4,13 +4,22 @@ I'm using the Ionic blank template as a start. This project is for holding info 
 The mobile app itself doesn't do anything. It builds and it runs, but it's just a blank Ionic app. The meat is in the build process and what it does.
 
 
+# So far what I've done
+* Prepped the package.json with npm dependencies
+* Hardcoded Cordova plugin versions
+* Added several hooks
+  * Change app ID in config.xml from DEV to PROD and back when necessary
+  * Increment package.json version then use that in the config.xml
 
-1. Set the app id in config.xml. Change it from id="com.ionicframework.ldmpackage877612"
+Steps to try this out are below
+
+---
+1. **Manual** Set the app id in config.xml. Change it from id="com.ionicframework.ldmpackage877612"
     to something meaningful for your app: com.mycompanyname.myapp
 
-1. Set the version number in package.json to your apps version number! Start at 0.0.1
+1. **Manual** Set the version number in package.json to your apps version number! Start at 0.0.1
 
-1. Modify gulpfile.js tasks with your app id
+1. **Manual** Modify the following Gulp tasks (in gulpfile.js) with your app id
 ```
   use-dev-apid
     regex: "com.mycompanyname.myapp",
@@ -23,7 +32,7 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
   Why are we doing this?
   When using "ionic run" I will use a DEV version for my package name. The DEV version will get installed on my phone under **com.mycompanyname.myapp1234**
 
-  When doing a build and releasing the app to App Stores, I will have a different package name (my production ready app id) so I can my release version as well.
+  When doing a build and releasing the app to App Stores, I will have a different package name (my production ready app id) so I can install my release version as well.
 
 1. Install dependencies found in package.json
 
@@ -45,9 +54,9 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
 
     ionic run   
 
-   *Hooks will make sure App id is changed to DEV and then back to PROD version*
+   *Hooks will make sure App id is changed to DEV before deploying to the device*
 
-1. Build It
+1. Build It - **Make it ready for release or packaging for an external Build tool ** (Ionic Package, PhoneGap Build)
 ```
 ionic build
 ```
@@ -58,7 +67,7 @@ ionic build
   * build happens...
   * After Build
     * Increment PATCH version in package.json by 1
-    * package.json is incremented LAST in case the build fails. Doing this first means we would increment the version number for failed builds.
+      * package.json is incremented LAST in case the build fails. If we did this this first then we could increment the version number for failed builds.      
 
 1. Commit changes and tag
 
@@ -78,7 +87,7 @@ ionic package build ios --release --profile dev
 
     ionic package list
 
-1. Download build to "builds" directory (entry is in .gitignore already)
+1. Download build to **builds** directory (entry is in .gitignore already)
 
     ionic package download [build_number] -d builds
 
@@ -86,8 +95,7 @@ ionic package build ios --release --profile dev
    * DEV Builds - HockeyApp, AppBlade, TestFlight, etc.
    * PROD Builds - iTunes Connect or Google Play        
 
-
-
+---
 
 # Major and Minor versions
 If you are performing a release for a MAJOR or MINOR version:
@@ -97,5 +105,5 @@ If you are performing a release for a MAJOR or MINOR version:
         or
         gulp bump-major
 
-* 0.0.123 becomes 0.1.0
-* 0.1.123 becomes 1.0 (test this: should it be 1.0.0?)
+* 0.0.**123** becomes 0.**1**.0
+* **0**.1.123 becomes **1**.0 (test this: should it be 1.0.0?)
