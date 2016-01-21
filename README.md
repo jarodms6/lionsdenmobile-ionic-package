@@ -11,13 +11,16 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
 1. Set the version number in package.json to your apps version number! Start at 0.0.1
 
 1. Modify gulpfile.js tasks with your app id
-   use-dev-apid
-        regex: "com.mycompanyname.myapp",
-        replacement: "com.mycompanyname.myapp1234",
 
-   non-dev-apid
-        regex: "com.mycompanyname.myapp1234",
-        replacement: "com.mycompanyname.myapp",
+```
+  use-dev-apid
+    regex: "com.mycompanyname.myapp",
+    replacement: "com.mycompanyname.myapp1234",
+
+  non-dev-apid
+    regex: "com.mycompanyname.myapp1234",
+    replacement: "com.mycompanyname.myapp",
+```
 
    Why are we doing this?
    When using "ionic run" I will use a DEV version for my package name. The DEV version will get installed on my phone under **com.mycompanyname.myapp1234**
@@ -52,17 +55,19 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
     * Push to Git
 
 1. DEV Build
-        ionic package build android
-        ionic package build ios --release --profile dev
-
+```
+ionic package build android
+ionic package build ios --release --profile dev
+```
     (for PROD, use **--profile prod**)
 
 1. Determine build number(s)
-       ionic package list
+
+    ionic package list
 
 1. Download build to "builds" directory (entry is in .gitignore already)
 
-       ionic package download [build_number] -d builds
+    ionic package download [build_number] -d builds
 
 1. Upload build to App Distribution:
    * DEV Builds - HockeyApp, AppBlade, TestFlight, etc.
@@ -79,5 +84,5 @@ If you are performing a release for a MAJOR or MINOR version:
         or
         gulp bump-major
 
-* 0.0.1234 becomes 0.1.0
-* 0.1.1234 becomes 1.0
+* 0.0.123 becomes 0.1.0
+* 0.1.123 becomes 1.0 (test this: should it be 1.0.0?)
