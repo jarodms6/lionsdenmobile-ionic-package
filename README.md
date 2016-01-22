@@ -1,5 +1,5 @@
 
-I'm using the Ionic blank template as a start. This project is for holding info on my build process as well as hooks and Node packages.
+I'm using the Ionic blank template as a start. This project is for holding info on my build process as well as hooks and Node packages. I'll be refining this to make it usable by others as well as myself.
 
 The mobile app itself doesn't do anything. It builds and it runs, but it's just a blank Ionic app. The meat is in the build process and what it does.
 
@@ -11,13 +11,23 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
   * Change app ID in config.xml from DEV to PROD and back when necessary
   * Increment package.json version then use that in the config.xml
 
-Steps to try this out are below
+---
+# Merging this to your project
+### The following files can be dropped into your new Ionic project:
+* **hooks** directory
+* .gitignore
+* gulpfile.js
+
+### These files will need to be merged:
+* package.json -> dependencies and devDependencies is about it
 
 ---
+## Steps to try this build and deploy process
+
 1. **Manual** Set the app id in config.xml. Change it from id="com.ionicframework.ldmpackage877612"
     to something meaningful for your app: com.mycompanyname.myapp
 
-1. **Manual** Set the version number in package.json to your apps version number! Start at 0.0.1
+1. **Manual** Set the version number in package.json to your apps version number! Start at 0.0.1 or whatever you would like
 
 1. **Manual** Modify the following Gulp tasks (in gulpfile.js) with your app id
 ```
@@ -44,7 +54,7 @@ Steps to try this out are below
 
 1. Add the platform you are working on
 
-    ionic platform add [[android|ios]]
+    ionic platform add [[android | ios]]
 
 1. Make sure icon and splash screen resources are built
 
