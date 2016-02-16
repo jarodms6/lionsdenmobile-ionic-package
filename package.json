@@ -1,8 +1,10 @@
 {
-  "name": "ldmpackage",
-  "version": "0.0.1",
+  "name": "My App Name",
+  "version": "0.0.7",
+  "appId": "com.mycompanyname.myapp",
   "description": "My Ionic Example Package: An Ionic project",
   "dependencies": {
+    "cordova-config": "^0.6.2",
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
     "gulp-concat": "^2.2.0",

@@ -52,30 +52,12 @@ gulp.task('git-check', function(done) {
     done();
 });
 
+
+/*
+Custom code from Lions Den Mobile locted here
+*/
 var replace = require('replace');
 var replaceFiles = ['./config.xml'];
-
-gulp.task('use-dev-apid', function() {
-    return replace({
-        regex: "com.mycompanyname.myapp",
-        replacement: "com.mycompanyname.myapp1234",
-        paths: replaceFiles,
-        recursive: false,
-        silent: false,
-    });
-});
-
-gulp.task('non-dev-apid', function() {
-    return replace({
-        regex: "com.mycompanyname.myapp1234",
-        replacement: "com.mycompanyname.myapp",
-        paths: replaceFiles,
-        recursive: false,
-        silent: false,
-    });
-});
-
-
 var gulp = require('gulp');
 var bump = require('gulp-bump');
 var pkg = require('./package.json');
@@ -89,23 +71,48 @@ gulp.task('set-version', function() {
         .pipe(gulp.dest('./www/js/'))
 });
 
-
 // Basic usage:
 // Will patch the version
 gulp.task('bump', function() {
     gulp.src('./package.json')
-    .pipe(bump({type:'patch'}))
+        .pipe(bump({
+            type: 'patch'
+        }))
         .pipe(gulp.dest('./'));
 });
 
 gulp.task('bump-minor', function() {
     gulp.src('./package.json')
-    .pipe(bump({type:'minor'}))
+        .pipe(bump({
+            type: 'minor'
+        }))
         .pipe(gulp.dest('./'));
 });
 
 gulp.task('bump-major', function() {
     gulp.src('./package.json')
-    .pipe(bump({type:'major'}))
+        .pipe(bump({
+            type: 'major'
+        }))
         .pipe(gulp.dest('./'));
+});
+
+gulp.task('set-dev', function() {
+    var Config = require('cordova-config');
+    // Load and parse the config.xml
+    var config = new Config('config.xml');
+    config.setName(pkg.name + " DEV");
+    config.setID(pkg.appId + "1234");
+    // Write the config file
+    config.writeSync();
+});
+
+gulp.task('set-prod', function() {
+    var Config = require('cordova-config');
+    // Load and parse the config.xml
+    var config = new Config('config.xml');
+    config.setName(pkg.name);
+    config.setID(pkg.appId);
+    // Write the config file
+    config.writeSync();
 });

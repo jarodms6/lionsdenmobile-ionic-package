@@ -11,4 +11,4 @@ process.stdout.write('BEFORE PLATFORM ADD');
 require(gulpfile);
 
 //interaction
-gulp.start('use-dev-apid');
+gulp.start('set-dev');

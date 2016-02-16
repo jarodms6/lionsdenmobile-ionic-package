@@ -11,4 +11,4 @@ process.stdout.write('BEFORE RUN');
 require(gulpfile);
 
 //interaction
-gulp.start('use-dev-apid');
+gulp.start('set-dev');

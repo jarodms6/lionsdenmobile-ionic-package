@@ -3,6 +3,7 @@ I'm using the Ionic blank template as a start. This project is for holding info 
 
 The mobile app itself doesn't do anything. It builds and it runs, but it's just a blank Ionic app. The meat is in the build process and what it does.
 
+## I've tested this on Windows (for Android). Would love feedback/info regarding iOS.
 
 # So far what I've done
 * Prepped the package.json with npm dependencies
@@ -19,7 +20,7 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
 * gulpfile.js
 
 ### These files will need to be merged:
-* package.json -> dependencies and devDependencies is about it
+* package.json -> dependencies and devDependencies is about it for a new build
 
 ---
 ## Steps to try this build and deploy process
@@ -29,22 +30,25 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
 
 1. **Manual** Set the version number in package.json to your apps version number! Start at 0.0.1 or whatever you would like
 
-1. **Manual** Modify the following Gulp tasks (in gulpfile.js) with your app id
-```
-  use-dev-apid
-    regex: "com.mycompanyname.myapp",
-    replacement: "com.mycompanyname.myapp1234",
+1. **Manual** Modify the following Variables in in *package.json*
 
-  non-dev-apid
-    regex: "com.mycompanyname.myapp1234",
-    replacement: "com.mycompanyname.myapp",
 ```
-  Why are we doing this?
+"name": "My App Name",
+"version": "0.0.1",
+"appId": "com.mycompanyname.myapp",
+
+```
+
+  Why are we doing this? Because I want to be able to install the PROD and DEV version of my apps. I need a different package name.
+
   When using "ionic run" I will use a DEV version for my package name. The DEV version will get installed on my phone under **com.mycompanyname.myapp1234**
+
+  The App Name (the icon name after being installed), will contain DEV at the end so I know which is which
 
   When doing a build and releasing the app to App Stores, I will have a different package name (my production ready app id) so I can install my release version as well.
 
-1. Install dependencies found in package.json
+## Next Steps
+1. Install NPM dependencies found in package.json
 
     npm install   
 
@@ -70,14 +74,15 @@ The mobile app itself doesn't do anything. It builds and it runs, but it's just 
 ```
 ionic build
 ```
-  * Before Build
+  * Before Build hooks
     * Make sure we are using the PROD App ID
     * Use cordova-version to update config.xml version number to what is in package.json
       * At this point, package.json has the version number from the last SUCCESSFUL build_number
+    * Create version.js and copy it to www/js -> This will allow you to show the version number in your app
   * build happens...
   * After Build
     * Increment PATCH version in package.json by 1
-      * package.json is incremented LAST in case the build fails. If we did this this first then we could increment the version number for failed builds.      
+      * package.json is incremented LAST in case the build fails. If we did this first then we could increment the version number for failed builds.
 
 1. Commit changes and tag
 
@@ -97,7 +102,7 @@ ionic package build ios --release --profile dev
 
     ionic package list
 
-1. Download build to **builds** directory (entry is in .gitignore already)
+1. Download build to **builds** directory (entry is in .gitignore already; Rememeber to MKDIR builds)
 
     ionic package download [build_number] -d builds
 

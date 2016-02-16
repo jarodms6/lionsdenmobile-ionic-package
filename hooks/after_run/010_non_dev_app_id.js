@@ -11,4 +11,4 @@ process.stdout.write('AFTER RUN ');
 require(gulpfile);
 
 //interaction
-gulp.start('non-dev-apid');
+gulp.start('set-prod');
