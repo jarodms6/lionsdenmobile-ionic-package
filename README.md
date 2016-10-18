@@ -3,6 +3,11 @@ I'm using the Ionic blank template as a start. This project is for holding info 
 
 The mobile app itself doesn't do anything. It builds and it runs, but it's just a blank Ionic app. The meat is in the build process and what it does.
 
+# Want to use this?
+```
+ionic start myApp https://github.com/jarodms6/lionsdenmobile-ionic-package
+```
+
 ## I've tested this on Windows (for Android). Would love feedback/info regarding iOS.
 
 # So far what I've done
